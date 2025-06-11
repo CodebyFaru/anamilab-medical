@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anamilab Medical | Proveedor Médico Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --indigo: #2c5282;
+            --indigo-light: #4299e1;
+            --indigo-dark: #1a365d;
+            --teal: #319795;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --dark-gray: #333333;
+            --accent: #e53e3e;
+            --medical-blue: #1a5f96;
+            --medical-light: #e8f4f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--indigo-dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled .logo-image {
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--medical-blue);
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo span {
+            color: var(--teal);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--medical-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--indigo-light);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--teal);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            margin-left: 30px;
+            font-size: 1.5rem;
+            color: var(--medical-blue);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(26, 95, 150, 0.9), rgba(44, 82, 130, 0.9));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            padding: 50px;
+            border-radius: 15px;
+            animation: fadeInUp 1s ease;
+            color: var(--white);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .hero-highlight {
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: var(--white);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-btn i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .whatsapp-btn:hover::after {
+            left: 100%;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 150px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 15%;
+            right: 10%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border: none;
+            z-index: 1;
+            opacity: 1;
+            overflow: hidden;
+            position: absolute;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+        }
+
+        .circle-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 100px 0;
+            background-color: var(--medical-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--medical-blue);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--teal);
+            border-radius: 2px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            background: var(--medical-blue);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 1.6rem;
+            margin: 0;
+        }
+
+        .category-content {
+            padding: 25px;
+            flex: 1;
+        }
+
+        .category-description {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .subcategories {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .subcategories li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .subcategories li:before {
+            color: var(--teal);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .category-footer {
+            background: var(--light-gray);
+            padding: 15px 25px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-weight: 600;
+            color: var(--medical-blue);
+            transition: background 0.3s;
+        }
+
+        .category-footer:hover {
+            background: var(--medical-blue);
+            color: white;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid #e0e0e0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--teal);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .view-product {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .view-product-btn {
+            background: var(--medical-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .view-product-btn i {
+            margin-right: 8px;
+        }
+
+        .view-product-btn:hover {
+            background: var(--indigo-light);
+            transform: translateY(-3px);
+        }
+
+        .product-card:hover .view-product {
+            opacity: 1;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--medical-blue);
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: var(--teal);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-to-cart {
+            background: var(--medical-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .add-to-cart i {
+            margin-right: 8px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--indigo-light);
+        }
+
+        .quick-view-btn {
+            background: var(--white);
+            color: var(--medical-blue);
+            border: 1px solid var(--medical-blue);
+            padding: 12px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .quick-view-btn:hover {
+            background: var(--medical-blue);
+            color: var(--white);
+        }
+
+        /* Product Detail Modal */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-modal-content {
+            background: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .close-product {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--medical-blue);
+            transition: color 0.3s;
+        }
+
+        .close-product:hover {
+            color: var(--accent);
+        }
+
+        .product-detail-img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .product-detail-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-detail-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--medical-blue);
+        }
+
+        .product-detail-price {
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .product-detail-description {
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .product-detail-features {
+            margin-bottom: 30px;
+        }
+
+        .product-detail-features h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .product-detail-features ul {
+            padding-left: 20px;
+        }
+
+        .product-detail-features li {
+            margin-bottom: 8px;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: right 0.4s ease;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .cart-header h3 {
+            font-size: 1.5rem;
+            color: var(--medical-blue);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: var(--accent);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--medical-blue);
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .quantity-input {
+            width: 40px;
+            height: 28px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        .remove-item:hover {
+            color: #c53030;
+        }
+
+        .cart-summary {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--medical-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .checkout-btn:hover {
+            background: var(--indigo-light);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--medical-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--medical-blue);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--indigo-dark) 0%, var(--medical-blue) 100%);
+            color: var(--white);
+        }
+
+        .contact .section-title h2 {
+            color: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            padding: 30px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--teal);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .contact-text p, .contact-text a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: var(--teal);
+        }
+
+        .whatsapp-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .whatsapp-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-box p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--medical-blue);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--teal);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--teal);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--teal);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .about-image {
+                order: -1;
+            }
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            .cart-modal {
+                width: 320px;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            .product-modal-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 5px 15px;
+            }
+            .hero-content {
+                text-align: center;
+                padding: 30px;
+            }
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo-image {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .hero-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+            .circle-1 {
+                display: none;
+            }
+            .product-detail-img {
+                height: 300px;
+            }
+            .product-detail-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul li {
+                margin: 5px 10px;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .whatsapp-btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+            .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .cart-item-img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-actions {
+                flex-direction: column;
+            }
+            .quick-view-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--medical-blue);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 3000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.5s ease;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.5s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%231a5f96' rx='10'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40 Z' fill='%23319795'/%3E%3Ccircle cx='40' cy='40' r='15' fill='white'/%3E%3C/svg%3E" alt="Anamilab Logo">
+                </div>
+                <h1>Anami<span>lab</span> Medical</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Inicio</a></li>
+                    <li><a href="#categories">Categorías</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-count">0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-summary">
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fab fa-whatsapp"></i> Completar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="product-modal-content">
+            <button class="close-product" id="closeProduct"><i class="fas fa-times"></i></button>
+            <img src="" alt="Product Image" class="product-detail-img" id="productDetailImg">
+            <div class="product-detail-content">
+                <h3 class="product-detail-title" id="productDetailTitle"></h3>
+                <div class="product-detail-price" id="productDetailPrice"></div>
+                <p class="product-detail-description" id="productDetailDescription"></p>
+                <div class="product-detail-features">
+                    <h4>Características:</h4>
+                    <ul id="productDetailFeatures">
+                        <!-- Features will be added here -->
+                    </ul>
+                </div>
+                <div class="product-detail-actions">
+                    <button class="add-to-cart" id="addToCartDetail">
+                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                    </button>
+                    <a href="https://wa.me/18493933231" class="whatsapp-btn" style="padding: 12px 20px;">
+                        <i class="fab fa-whatsapp"></i> Consultar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-container">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%231a5f96'/%3E%3Cpath d='M0,400 Q600,100 1200,400 L1200,800 L0,800 Z' fill='%232c5282'/%3E%3Ccircle cx='300' cy='300' r='100' fill='%23319795' opacity='0.3'/%3E%3Ccircle cx='900' cy='500' r='150' fill='%23319795' opacity='0.3'/%3E%3C/svg%3E" 
+                 alt="Medical background" 
+                 class="hero-bg-image">
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <!-- Decorative elements -->
+        <div class="circle-1">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='150' fill='white'/%3E%3Cpath d='M150 70 L190 150 L150 230 L110 150 Z' fill='%231a5f96'/%3E%3Ccircle cx='150' cy='150' r='50' fill='%23319795'/%3E%3C/svg%3E" alt="Anamilab Logo" />
+        </div>
+        
+        <div class="container">
+            <div class="hero-content animated">
+                <h2>Suministros Médicos de Calidad para Profesionales</h2>
+                <p>Anamilab Medical es su proveedor confiable de equipos médicos, insumos y suministros para hospitales, clínicas y profesionales de la salud en República Dominicana.</p>
+                <a href="https://wa.me/18493933231" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                </a>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">7+</div>
+                        <div class="stat-label">Años de Experiencia</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Productos Médicos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Clientes Satisfechos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras Especialidades</h2>
+                <p>Explora nuestras categorías de productos médicos especializados</p>
+            </div>
+            <div class="categories-grid">
+                <!-- Category 1 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <h3 class="category-name">Material de extracción e infusión</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Todo lo necesario para procedimientos de extracción e infusión seguros y eficientes.</p>
+                        <ul class="subcategories">
+                            <li>Agujas y palomillas para extracción e infusión</li>
+                            <li>Holders y jeringas de dos y tres cuerpos</li>
+                            <li>Adaptadores múltiples o tipo Luer</li>
+                            <li>Opciones según uso clínico y características de seguridad</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20estoy%20interesado%20en%20productos%20de%20Material%20de%20extracción%20e%20infusión" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <h3 class="category-name">Tubos para extracción de sangre</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Gama completa de tubos para recolección y análisis de muestras sanguíneas.</p>
+                        <ul class="subcategories">
+                            <li>Tubos de vacío con diferentes aditivos (gel, activador, EDTA, etc.)</li>
+                            <li>Tubos sin vacío con tapones perforables</li>
+                            <li>Capilares y tubos pediátricos</li>
+                            <li>Explicación de función para cada tipo</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20estoy%20interesado%20en%20Tubos%20para%20extracción%20de%20sangre" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h3 class="category-name">Recogida de muestras (orina y heces)</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Sistemas para recolección y transporte de muestras no sanguíneas.</p>
+                        <ul class="subcategories">
+                            <li>Sistemas de recogida por vacío y tradicionales</li>
+                            <li>Frascos de diferentes volúmenes (30, 60, 120 ml)</li>
+                            <li>Conjuntos de frasco + tubo</li>
+                            <li>Contenedores de 24 horas</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20me%20gustaría%20saber%20más%20sobre%20productos%20para%20recogida%20de%20muestras%20(orina%20y%20heces)" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-vial-virus"></i>
+                        </div>
+                        <h3 class="category-name">Escobillones y medios de transporte</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Solución completa para transporte y preservación de muestras microbiológicas.</p>
+                        <ul class="subcategories">
+                            <li>Escobillones secos (estériles o no)</li>
+                            <li>Escobillones con medios líquidos (Amies, Stuart, etc.)</li>
+                            <li>Medios de enriquecimiento (TSB, Lim Broth, Selenito)</li>
+                            <li>Soluciones para ADN, microbioma y ácidos nucleicos</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20quiero%20información%20sobre%20escobillones%20y%20medios%20de%20transporte" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 5 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-vials"></i>
+                        </div>
+                        <h3 class="category-name">Tests de diagnóstico rápido</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Pruebas rápidas para una amplia gama de condiciones médicas.</p>
+                        <ul class="subcategories">
+                            <li>Enfermedades de transmisión sexual</li>
+                            <li>Infecciones respiratorias e intestinales</li>
+                            <li>Parasitarias, marcadores tumorales</li>
+                            <li>Test de embarazo, drogas, alcohol y alergias</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20quiero%20más%20información%20sobre%20tests%20de%20diagnóstico%20rápido" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 6 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3 class="category-name">Determinación de grupo sanguíneo y anticuerpos</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Productos para pruebas de tipificación sanguínea y serológicas.</p>
+                        <ul class="subcategories">
+                            <li>Test ABO y Rh</li>
+                            <li>Reactivos monoclonales y antisueros</li>
+                            <li>Placas de grupo sanguíneo</li>
+                            <li>Líquidos de aglutinación y soluciones serológicas</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20me%20interesan%20los%20productos%20de%20Determinación%20de%20grupo%20sanguíneo%20y%20anticuerpos" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 7 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="category-name">Microscopía y tinciones</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Materiales esenciales para laboratorios de análisis microscópico.</p>
+                        <ul class="subcategories">
+                            <li>Portaobjetos y cubreobjetos</li>
+                            <li>Medios de montaje</li>
+                            <li>Placas para recuento celular</li>
+                            <li>Kits de tinción (Diff-Quick, Gram, Ziehl-Neelsen)</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20estoy%20interesado%20en%20materiales%20de%20microscopía%20y%20tinciones" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 8 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h3 class="category-name">Accesorios</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Consumables auxiliares para procedimientos médicos y de laboratorio.</p>
+                        <ul class="subcategories">
+                            <li>Guantes de nitrilo sin polvo</li>
+                            <li>Lancetas y celulosa precortada</li>
+                            <li>Tiritas y cintas compresivas</li>
+                            <li>Otros consumibles esenciales</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20me%20interesan%20los%20accesorios%20y%20consumibles%20médicos" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+
+                <!-- Category 9 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3 class="category-name">Transporte de muestras clínicas</h3>
+                    </div>
+                    <div class="category-content">
+                        <p class="category-description">Sistemas seguros para transporte de muestras biológicas.</p>
+                        <ul class="subcategories">
+                            <li>Bolsas isotérmicas homologadas</li>
+                            <li>Contenedores secundarios herméticos</li>
+                            <li>Tubos resistentes a presión</li>
+                            <li>Sistemas refrigerados y congelados</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/18493933231?text=Hola,%20quiero%20más%20información%20sobre%20transporte%20de%20muestras%20clínicas" target="_blank" class="category-footer">
+                        <i class="fab fa-whatsapp"></i> Ver productos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Productos Destacados</h2>
+                <p>Suministros médicos de la más alta calidad</p>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="003.png" alt="HCV Rapid Test Cassette">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="1">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>HCV Rapid Test Cassette</h3>
+                        <p class="product-description">Prueba rápida para detección de Hepatitis C. Resultados en 15 minutos.</p>
+            
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="1" data-name="HCV Rapid Test Cassette" data-image="ANA/003.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="1">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="004.png" alt="HBsAg Rapid Test Cassette">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="2">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>HBsAg Rapid Test Cassette</h3>
+                        <p class="product-description">Prueba rápida para detección de antígeno de superficie de Hepatitis B.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="2" data-name="HBsAg Rapid Test Cassette" data-image="ANA/004.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="2">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-badge">Nuevo</div>
+                    <div class="product-img">
+                        <img src="005.png" alt="Dengue IGg/lgM Rapid Test Cassette">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="3">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Dengue IGg/lgM Rapid Test Cassette</h3>
+                        <p class="product-description">Prueba rápida para detección de anticuerpos IgG e IgM para Dengue.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="3" data-name="Dengue IGg/lgM Rapid Test Cassette" data-image="005.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="3">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-badge">Popular</div>
+                    <div class="product-img">
+                        <img src="006.png" alt="Hcg Rapid Test Cassette">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="4">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Hcg Rapid Test Cassette</h3>
+                        <p class="product-description">Prueba rápida para detección cualitativa de gonadotropina coriónica humana.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="4" data-name="Hcg Rapid Test Cassette" data-image="ANA/006.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="4">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="008.png" alt="HIV 1/2 Rapid Test Cassette">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="5">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>HIV 1/2 Rapid Test Cassette</h3>
+                        <p class="product-description">Prueba rápida para detección de anticuerpos contra VIH-1 y VIH-2.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="5" data-name="HIV 1/2 Rapid Test Cassette" data-image="008.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="5">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-badge">Oferta</div>
+                    <div class="product-img">
+                        <img src="008.png" alt="Tubos Propileno 12x75">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="6">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Tubos Propileno 12x75</h3>
+                        <p class="product-description">Tubos de polipropileno estériles para muestras biológicas.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="6" data-name="Tubos Propileno 12x75" data-image="008.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="6">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="sterileswab.png" alt="Steril swab">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="7">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Isopo trancervicales</h3>
+                        <p class="product-description">Para recolectar muestras del cuello uterino </p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="7" data-name="Isopo Trancervicales" data-image="sterilswab.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="7">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-badge">Destacado</div>
+                    <div class="010.png" alt="Aplicador de madera con punta de algodon">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="8">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Aplicador De Madera Con Punta De Algodon</h3>
+                        <p class="product-description">Tensiómetro de brazo automático con detección de arritmias.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="8" data-name="Aplicador de madera con punta de algodon" data-image="ANA/010.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="8">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="testdengue.png" alt="test de dengue">
+                        <div class="view-product">
+                            <button class="view-product-btn" data-id="9">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Prueba De Dengue</h3>
+                        <p class="product-description">Prueba De Dengue</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="9" data-name="Oxímetro de Pulso" data-image="testdengue.png">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
+                            <button class="quick-view-btn" data-id="9">
+                                <i class="fas fa-search"></i> Ver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre Anamilab Medical</h2>
+                    <p>Fundada en 2010, Anamilab Medical se ha establecido como un proveedor confiable de suministros médicos para centros de salud en toda la República Dominicana. Nuestro compromiso con la calidad, confiabilidad y servicio al cliente nos ha convertido en el socio preferido de los profesionales de la salud.</p>
+                    <p>Ofrecemos productos de los principales fabricantes a nivel mundial, garantizando que nuestros clientes reciban las últimas innovaciones en tecnología médica. Nuestro inventario incluye desde consumibles básicos hasta equipos de diagnóstico avanzados.</p>
+                    <p>En Anamilab, entendemos que los proveedores de atención médica necesitan socios en los que puedan confiar. Por eso hemos construido nuestra reputación sobre entregas puntuales, soporte al cliente excepcional y precios competitivos.</p>
+                </div>
+                <div class="about-image">
+                    <img src="home.jpg" alt="Sobre Anamilab Medical">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctenos</h2>
+                <p>Estamos para servir sus necesidades de suministros médicos</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <h4>Nuestra Ubicación</h4>
+                                <p>C. Jardines de Luxemburgo, Santo Domingo 10501</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="contact-text">
+                                <h4>Teléfono</h4>
+                                <p><a href="tel:8493933231">(849) 393-3231</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p><a href="mailto:anamilabmedical@gmail.com">anamilabmedical@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contact-text">
+                                <h4>Horario</h4>
+                                <p>Lunes - Viernes: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="whatsapp-box">
+                    <h3>WhatsApp Business</h3>
+                    <p>Para la respuesta más rápida, contáctenos directamente a través de WhatsApp. Nuestro equipo está disponible durante el horario comercial para responder sus preguntas, proporcionar cotizaciones y tomar pedidos.</p>
+                    <a href="https://wa.me/18493933231" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Enviar Mensaje por WhatsApp
+                    </a>
+                    <p class="small" style="margin-top: 20px; font-size: 0.9rem;">Simplemente haga clic en el botón de arriba para iniciar una conversación con nuestro equipo de ventas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Anamilab Medical</h4>
+                    <p>Su socio de confianza para suministros y equipos médicos de primera calidad. Sirviendo a profesionales de la salud con excelencia desde 2010.</p>
+                    <<div class="social-links">
+    <a href="https://www.instagram.com/anamilabmedical" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#categories">Categorías</a></li>
+                        <li><a href="#products">Productos</a></li>
+                        <li><a href="#about">Sobre Nosotros</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Soporte por WhatsApp</h4>
+                    <p>Contáctenos directamente por WhatsApp para asistencia inmediata con pedidos, cotizaciones y consultas.</p>
+                    <a href="https://wa.me/18493933231" class="whatsapp-btn" style="display: inline-flex; margin-top: 15px; padding: 12px 25px; font-size: 1rem;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Anamilab Medical. Todos los derechos reservados. | Diseñado con ❤️ para Profesionales de la Salud</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> <span id="notification-text"></span>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const overlay = document.getElementById('overlay');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        const navLinks = document.querySelectorAll('nav ul li a');
+        const quickViewButtons = document.querySelectorAll('.quick-view-btn');
+        const viewProductButtons = document.querySelectorAll('.view-product-btn');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+
+        // Product detail modal elements
+        const productModal = document.getElementById('productModal');
+        const closeProduct = document.getElementById('closeProduct');
+        const productDetailImg = document.getElementById('productDetailImg');
+        const productDetailTitle = document.getElementById('productDetailTitle');
+        const productDetailPrice = document.getElementById('productDetailPrice');
+        const productDetailDescription = document.getElementById('productDetailDescription');
+        const productDetailFeatures = document.getElementById('productDetailFeatures');
+        const addToCartDetail = document.getElementById('addToCartDetail');
+
+        // Product data
+        const productsData = {
+            '1': {
+                title: 'HCV Rapid Test Cassette',
+                image: 'ANA/003.png',
+                description: 'Prueba rápida para detección de Hepatitis C. Resultados en 15 minutos. Sensibilidad del 99.8% y especificidad del 99.5%. Ideal para clínicas y laboratorios.',
+                features: [
+                    'Resultados en 15 minutos',
+                    'Alta sensibilidad (99.8%)',
+                    'Fácil de usar',
+                    'Incluye todos los componentes necesarios',
+                    'Almacenamiento a temperatura ambiente'
+                ]
+            },
+            '2': {
+                title: 'HBsAg Rapid Test Cassette',
+                image: 'ANA/004.png',
+                description: 'Prueba rápida para detección de antígeno de superficie de Hepatitis B. Resultados precisos en solo 20 minutos.',
+                features: [
+                    'Detección de HBsAg',
+                    'Resultados en 20 minutos',
+                    'Sensibilidad del 99.6%',
+                    'Especificidad del 99.3%',
+                    'No requiere refrigeración'
+                ]
+            },
+            '3': {
+                title: 'Dengue IGg/lgM Rapid Test Cassette',
+                image: 'ANA/005.png',
+                description: 'Prueba rápida para detección cualitativa de anticuerpos IgG e IgM contra el virus del Dengue en suero, plasma o sangre total.',
+                features: [
+                    'Detección de IgG e IgM',
+                    'Resultados en 15-20 minutos',
+                    'Sensibilidad >99%',
+                    'Especificidad >99%',
+                    'Fácil interpretación visual'
+                ]
+            },
+            '4': {
+                title: 'Hcg Rapid Test Cassette',
+                image: 'ANA/006.png',
+                description: 'Prueba rápida para detección cualitativa de gonadotropina coriónica humana (hCG) en orina para detección temprana de embarazo.',
+                features: [
+                    'Detección de hCG en orina',
+                    'Resultados en 5 minutos',
+                    'Sensibilidad 25 mIU/mL',
+                    'Precisión >99%',
+                    'Fácil de usar'
+                ]
+            },
+            '5': {
+                title: 'HIV 1/2 Rapid Test Cassette',
+                image: 'ANA/007.png',
+                description: 'Prueba rápida para la detección cualitativa de anticuerpos contra VIH-1 y VIH-2 en suero, plasma o sangre total.',
+                features: [
+                    'Detección de VIH-1 y VIH-2',
+                    'Resultados en 15 minutos',
+                    'Sensibilidad 100%',
+                    'Especificidad 99.8%',
+                    'CE marcado'
+                ]
+            },
+            '6': {
+                title: 'Tubos Propileno 12x75',
+                image: 'ANA/008.png',
+                description: 'Tubos de polipropileno estériles de 12x75 mm con tapa rosca. Ideales para almacenamiento de muestras biológicas.',
+                features: [
+                    'Capacidad: 5-7 ml',
+                    'Estériles y libres de pirógenos',
+                    'Resistentes a la centrifugación',
+                    'Tapa de polipropileno',
+                    'Lote certificado'
+                ]
+            },
+            '7': {
+                title: 'Isopo trancervicales',
+                image: 'ANA/sterileswab.png',
+                description: 'Swab Esteril.',
+                features: [
+                    '3 capas de protección',
+                    'Filtración bacteriana >98%',
+                    'Resistente a fluidos',
+                    'Ajuste nasal moldeable',
+                    '50 unidades por caja'
+                ]
+            },
+            '8': {
+                title: 'Aplicador de madera con punta de algodon',
+                image: 'ANA/010.png',
+                description: 'Tensiómetro de brazo automático con detección de arritmias. Pantalla LCD grande con indicadores de hipertensión.',
+                features: [
+                    'Memoria para 2 usuarios',
+                    'Detección de arritmias',
+                    'Manguito de 22-42 cm',
+                    'Validación clínica',
+                    'Incluye baterías y estuche'
+                ]
+            },
+            '9': {
+                title: 'Prueba De Dengue',
+                image: 'ANA/testdengue.png',
+                description: 'Oxímetro digital de dedo con pantalla OLED rotativa. Mide SpO2 y frecuencia cardíaca con precisión clínica.',
+                features: [
+                    'Pantalla OLED multidireccional',
+                    'Rango de SpO2: 70%-100%',
+                    'Precisión: ±2%',
+                    'Bajo consumo de energía',
+                    'Incluye cordón y pilas'
+                ]
+            }
+        };
+
+        // Initialize cart
+        function initCart() {
+            const savedCart = localStorage.getItem('anamilabCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
+        }
+
+        // Update cart UI
+        function updateCart() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            // Save cart to localStorage
+            localStorage.setItem('anamilabCart', JSON.stringify(cart));
+            // Update cart modal
+            updateCartModal();
+        }
+
+        // Update cart modal content
+        function updateCartModal() {
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart" style="text-align: center; padding: 30px; color: #777;">Tu carrito está vacío</p>';
+                return;
+            }
+            cart.forEach(item => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                cartItems.appendChild(cartItemElement);
+            });
+            // Add event listeners for new elements
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', decreaseQuantity);
+            });
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', increaseQuantity);
+            });
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', changeQuantity);
+            });
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', removeItem);
+            });
+        }
+
+        // Add to cart function
+        function addToCart(event) {
+            const button = event.currentTarget;
+            const id = button.dataset.id;
+            const name = button.dataset.name;
+            const image = button.dataset.image;
+            
+            // Check if item is already in cart
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    quantity: 1,
+                    image
+                });
+            }
+            updateCart();
+            showNotification(`¡${name} añadido al carrito!`);
+        }
+
+        // Show notification
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(event) {
+            const id = event.target.dataset.id;
+            const item = cart.find(item => item.id === id);
+            if (item.quantity > 1) {
+                item.quantity -= 1;
+            } else {
+                cart = cart.filter(item => item.id !== id);
+            }
+            updateCart();
+        }
+
+        // Increase quantity
+        function increaseQuantity(event) {
+            const id = event.target.dataset.id;
+            const item = cart.find(item => item.id === id);
+            item.quantity += 1;
+            updateCart();
+        }
+
+        // Change quantity via input
+        function changeQuantity(event) {
+            const id = event.target.dataset.id;
+            const quantity = parseInt(event.target.value);
+            const item = cart.find(item => item.id === id);
+            if (quantity > 0) {
+                item.quantity = quantity;
+            } else {
+                cart = cart.filter(item => item.id !== id);
+            }
+            updateCart();
+        }
+
+        // Remove item
+        function removeItem(event) {
+            const id = event.target.closest('.remove-item').dataset.id;
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Tu carrito está vacío. Añade productos antes de continuar.');
+                return;
+            }
+            // Create WhatsApp message
+            let message = "¡Hola Anamilab Medical! Estoy interesado en los siguientes productos:\n\n"
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} - Cantidad: ${item.quantity}\n`;
+            });
+            message += `\nPor favor contáctenme para completar mi pedido.`;
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            // Redirect to WhatsApp
+            window.open(`https://wa.me/18493933231?text=${encodedMessage}`, '_blank');
+            // Clear cart after checkout
+            cart = [];
+            updateCart();
+            // Close cart modal
+            cartModal.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        // Open product detail
+        function openProductDetail(event) {
+            const button = event.currentTarget;
+            const productId = button.dataset.id;
+            const product = productsData[productId];
+            
+            if (product) {
+                productDetailImg.src = product.image;
+                productDetailImg.alt = product.title;
+                productDetailTitle.textContent = product.title;
+                productDetailPrice.textContent = product.price;
+                productDetailDescription.textContent = product.description;
+                
+                // Clear previous features
+                productDetailFeatures.innerHTML = '';
+                
+                // Add features
+                product.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    productDetailFeatures.appendChild(li);
+                });
+                
+                // Update add to cart button
+                addToCartDetail.dataset.id = productId;
+                addToCartDetail.dataset.name = product.title;
+                addToCartDetail.dataset.image = product.image;
+                
+                // Open modal
+                productModal.classList.add('open');
+                overlay.classList.add('active');
+            }
+        }
+
+        // Close product detail
+        function closeProductDetail() {
+            productModal.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        // Header scroll effect
+        function handleScroll() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            // Active nav link based on scroll position
+            const fromTop = window.scrollY + 100;
+            navLinks.forEach(link => {
+                const section = document.querySelector(link.hash);
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initCart();
+            
+            // Add event listeners
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+            
+            quickViewButtons.forEach(button => {
+                button.addEventListener('click', openProductDetail);
+            });
+            
+            viewProductButtons.forEach(button => {
+                button.addEventListener('click', openProductDetail);
+            });
+            
+            cartIcon.addEventListener('click', () => {
+                cartModal.classList.add('open');
+                overlay.classList.add('active');
+            });
+            
+            closeCart.addEventListener('click', () => {
+                cartModal.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+            
+            closeProduct.addEventListener('click', closeProductDetail);
+            
+            overlay.addEventListener('click', () => {
+                cartModal.classList.remove('open');
+                productModal.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+            
+            checkoutBtn.addEventListener('click', checkout);
+            
+            addToCartDetail.addEventListener('click', addToCart);
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Scroll event listener
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+        });
+    </script>
+</body>
+</html>
