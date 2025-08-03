@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://codebyfaru.github.io/anamilab-medical/sitemap.xml
